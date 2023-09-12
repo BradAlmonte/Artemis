@@ -1,0 +1,282 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Artimis</title>
+    <link rel="icon" href="https://lh3.googleusercontent.com/pw/AIL4fc9DoKPeROvyse9mKH0y5riExjHir6d3ypAwMqD7yvH4U0UXRkrfWyHMWjaZUd3553WfWpJI1zfJn0TrDxPvJhYiZzcG5yWGUrIaIzAO8yq5N9BlUT9A64Qtb1evzRnjgu6rX9fGvEArvxmCwPdhLgcWyyS0plALh6_A8TX1p0HteOygIQ6u3hmo76531FmOwcqJ6SrMO1HhFK-qkLvPG40Nak7JM00mNwWj_SCbQmjCZf_rA9VrTE9Y-Dzh-3T6ZNOJ2RNPFsc4j8M5BDhDsjkBbAhN5jFmdXHbKUGmqZ0A7B-_Fb-X-Ps--jUbJUCIkLFLzpO9AnkVZgF8HxgiY5sw75pJcsXYiX_DtPFJ9-FuVXHv3vDLGJfCrn9FMSO2CYCvvXLuvsiZlxz-JF5TT1abCuqPJa4545uIlNXWuo_-TZtQYijOKjhUOygI7pRK5qtrxraG4y6nhN6UfA2N1LXgTtXv-gyaGaoPjaNBpaaWpRzY_rHjCYXL8Ht1ZRQHTwGH6Z-udznNogWJUsl2L1iu3HH4RhpWOCb7xqAivtLY92Pj7g2J-UxuVQU1nHWHnRJYXimidis5ecVuo6yNwEIR3WuqHg3Yp9OaNjV6YXy_pOS0GjCK2RbmRQh2XVKOgTH1ydZ-5gyqnBXzOqZxqWajNZYIZ32dymFBEE2X7-v74Z0ftOyAML4-dtBoMRugAgbO6sfKM4yt-4M1kjKpZPCDRYDZO5hzn-fgKSXi-pbmkEFsw2xp9aPyKMNpcTGS42IR6Gxt0K7p376Fvv4oJuwXo3AH1dIA2SgvZyB0jZjZGnbAfqCGsIFharP7raI7mlnbz0W31wRbX8JDgMXgwvmJpEAnN7FKx1dcQ44SYSLmxA4nL4YIKueOloxmlBEZFmfjd0H_6CKSjFc-CI3R-DkKRgU=w363-h362-s-no?authuser=0" type="image/x-icon">
+     <link rel="stylesheet" type="text/css" href="Artemis.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+    <style>
+        body {
+            margin: 0;
+            overflow: hidden;
+        }
+    </style>
+</head>
+<!-- Write your comments here -->
+<!-- Artemis's body -->
+
+<style>
+
+    body {
+                margin: 0;
+                overflow: hidden;
+            }
+    
+    #container {
+        position: relative;
+    }
+    
+    #sphere-container {
+        position: relative;
+    }
+    
+    
+    
+    #artemis-text {
+        position: absolute;
+        top: 180px;
+        left: 50%;
+        transform: translateX(-50%);
+        color: white;
+        font-size: 50px;
+    }
+    
+    
+    
+            #artemis-container {
+                position: absolute;
+                top: 70%;
+                left: 50%;
+                transform: translateX(-50%);
+                color: white;
+                font-size: 24px;
+                overflow: hidden;
+            }
+    
+            #artemis {
+                white-space: nowrap;
+                overflow: hidden;
+                border-right: 1px solid white;
+                animation: typing 5s steps(10) infinite, blink-caret 0.5s step-end infinite;
+            }
+    
+    @keyframes rotate {
+        0% {
+            transform: translate(-50%, -50%) rotate(0deg);
+        }
+        100% {
+            transform: translate(-50%, -50%) rotate(360deg);
+        }
+    }
+    
+    </style>
+    
+
+        <body> 
+            <div id="container">
+                <div id="sphere-container">
+                    <div id="sphere"></div>
+                    <div id="artemis-text">ARTEMIS</div>
+                </div>
+            </div>
+         <script>
+        // Initialize Three.js
+        const scene = new THREE.Scene();
+        const camera = new THREE.PerspectiveCamera(75, window.innerWidth / window.innerHeight, 0.1, 1000);
+        const renderer = new THREE.WebGLRenderer();
+        renderer.setSize(window.innerWidth, window.innerHeight);
+        document.body.appendChild(renderer.domElement);
+
+        // Create a holographic sphere
+        const geometry = new THREE.SphereGeometry(1, 20, 20);
+        const material = new THREE.MeshBasicMaterial({
+            color: 880808,
+            wireframe: true, // Display as wireframe
+            transparent: true, // Enable transparency
+            opacity: 0.7 // Adjust holographic opacity
+        });
+        const sphere = new THREE.Mesh(geometry, material);
+        scene.add(sphere);
+
+        // Position the camera
+        camera.position.z = 3;
+
+        // Animation loop
+        const animate = () => {
+            requestAnimationFrame(animate);
+
+            // Rotate the sphere
+            sphere.rotation.x += 0.005;
+            sphere.rotation.y += 0.005;
+// Set the initial rotation to align with the 23-degree axis (in radians)
+const initialTiltAngle = THREE.MathUtils.degToRad(30);
+sphere.rotation.x = initialTiltAngle;
+
+            renderer.render(scene, camera);
+        };
+
+        animate();
+
+        // Handle window resize
+        window.addEventListener('resize', () => {
+            const newWidth = window.innerWidth;
+            const newHeight = window.innerHeight;
+            camera.aspect = newWidth / newHeight;
+            camera.updateProjectionMatrix();
+            renderer.setSize(newWidth, newHeight);
+        });
+
+        // Function to trigger the bump animation when your AI talks
+        function triggerBumpAnimation() {
+            sphere.style.animation = 'bump 0.5s ease-in-out';
+            setTimeout(() => {
+                sphere.style.animation = '';
+            }, 500);
+        }
+
+        // Example usage to trigger the bump animation when your AI talks
+        speak("Hello, I am your voice assistant.");
+        triggerBumpAnimation();
+
+        function speak(text) {
+            // Your speech synthesis code here
+        }
+         </script>    
+        </body>
+
+
+<!-- Artemis's code  -->
+<script>
+    // Your existing Three.js code here
+
+    // Function to update subtitles
+    function updateSubtitle(text) {
+        const subtitleElement = document.getElementById('subtitle');
+        subtitleElement.innerText = text;
+    }
+
+    // Example usage to update the subtitles when your assistant speaks
+    speak("Hello, I am your voice assistant.");
+    updateSubtitle("Hello, I am your voice assistant.");
+</script>
+
+
+<h1>Voice Assistant</h1>
+<div id="output"></div>
+
+<script>
+    const recognition = new window.SpeechRecognition();
+    recognition.lang = 'en-US';
+    recognition.interimResults = false;
+    recognition.maxAlternatives = 1;
+
+    recognition.onresult = (event) => {
+        const transcript = event.results[0][0].transcript.toLowerCase();
+        document.getElementById('output').textContent = transcript;
+
+        if (transcript.includes('hello')) {
+            speak('Hello! How can I assist you?');
+        } else if (transcript.includes('reminder')) {
+            speak('Please specify the reminder time and message.');
+            // Implement reminder functionality
+        } else if (transcript.includes('to-do list')) {
+            speak('What task would you like to add to your to-do list?');
+            // Implement to-do list functionality
+        } else if (transcript.includes('search')) {
+            speak('What would you like to search for?');
+            // Implement web search functionality
+        } else if (transcript.includes('exit')) {
+            speak('Goodbye!');
+        } else {
+            speak("I didn't understand your request. Please try again.");
+        }
+    };
+
+    recognition.onend = () => {
+        recognition.start();
+    };
+
+    recognition.start();
+
+    function speak(text) {
+        const utterance = new SpeechSynthesisUtterance(text);
+        speechSynthesis.speak(utterance);
+    }
+</script>
+
+
+<!-- Add a small div box with a blinking loading light -->
+<div id="loading-box">
+    <div id="loading-light"></div>
+</div>
+
+<style>
+    #loading-box {
+        width: 100px;
+        height: 100px;
+        background-color: transparent;
+        position: absolute;
+        top: 75%;
+        left: 50%;
+        transform: translateX(-50%);
+    }
+
+    #loading-light {
+        width: 2px;
+        height: 20px;
+        background-color: white; /* You can change the color */
+        border-radius: 10%;
+        animation: blink 1s infinite alternate;
+    }
+
+    @keyframes blink {
+        0% {
+            opacity: 0;
+        }
+        100% {
+            opacity: 1;
+        }
+    }
+</style>
+
+    <!-- ... (your CSS and scripts) ... -->
+
+    <script>
+        // Your existing Three.js code here
+
+        // Function to update subtitles
+        function updateSubtitle(text) {
+            const subtitleElement = document.getElementById('subtitle');
+            subtitleElement.innerText = text;
+            // Call the function to change the loading light based on the text
+            changeLoadingLight(text);
+        }
+
+        // Example usage to update the subtitles when your assistant speaks
+        speak("Hello, I am your voice assistant.");
+        updateSubtitle("Hello, I am your voice assistant.");
+
+        // Function to change the loading light based on text
+        function changeLoadingLight(text) {
+            const loadingLight = document.getElementById('loading-light');
+            // Check the text content and change the light accordingly
+            if (text.includes('search')) {
+                // Change the light color to green, for example
+                loadingLight.style.backgroundColor = 'green';
+            } else if (text.includes('reminder')) {
+                // Change the light color to yellow, for example
+                loadingLight.style.backgroundColor = 'yellow';
+            } else {
+                // Reset the light color to red for other text
+                loadingLight.style.backgroundColor = 'red';
+            }
+        }
+    </script>
+
+    <!-- ... (your SpeechRecognition and other scripts) ... -->
+
+   
+    
+</html>

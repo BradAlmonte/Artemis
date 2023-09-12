@@ -1,0 +1,52 @@
+
+body {
+            margin: 0;
+            overflow: hidden;
+        }
+
+#container {
+    position: relative;
+}
+
+#sphere-container {
+    position: relative;
+}
+
+
+
+#artemis-text {
+    position: absolute;
+    top: 180px;
+    left: 50%;
+    transform: translateX(-50%);
+    color: white;
+    font-size: 50px;
+}
+
+
+
+        #artemis-container {
+            position: absolute;
+            top: 70%;
+            left: 50%;
+            transform: translateX(-50%);
+            color: white;
+            font-size: 24px;
+            overflow: hidden;
+        }
+
+        #artemis {
+            white-space: nowrap;
+            overflow: hidden;
+            border-right: 1px solid white;
+            animation: typing 5s steps(10) infinite, blink-caret 0.5s step-end infinite;
+        }
+
+@keyframes rotate {
+    0% {
+        transform: translate(-50%, -50%) rotate(0deg);
+    }
+    100% {
+        transform: translate(-50%, -50%) rotate(360deg);
+    }
+}
